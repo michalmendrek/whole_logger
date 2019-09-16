@@ -4,6 +4,7 @@
 #include <unix_crawler.h>
 #include <memory>
 #include <notification.h>
+#include <loger.h>
 
 class log_module
 {
@@ -13,7 +14,8 @@ class log_module
   public:
   log_module(std::string Path, std::string ModuleName);
  ~log_module();
-notify  *Notify;
+  notify    *Notify;
+  log_loger *Loger;
 
 
 
