@@ -39,16 +39,18 @@ void notify::handler(int sig) {
         for (auto it : File) {
           if (event->name == std::get<0>(it)) {
             if(std::get<1>(it)!=nullptr){
-            std::get<1>(it)();}
-            for(auto it:Loger)
+            //std::get<1>(it)();
+	    //}
+            for(auto itb:Loger)
 	    {
- 	     if(event->name == eraseSubStr(it->GetFileName(),"./"))
+ 	     if(event->name == eraseSubStr(itb->GetFileName(),"./"))
 		{
-		 it->UpdateData();
-		 std::cout << it->ReadNewData()<< std::endl;
+		 itb->UpdateData();
+		 std::get<1>(it)(itb->ReadNewData());
 		}
             }
-            std::cout << event->name << std::endl;
+	     }
+            //std::cout << event->name << std::endl;
           }
         }
       }
@@ -57,7 +59,7 @@ void notify::handler(int sig) {
   }
 }
 
-void notify::AddFileName(std::string FileName, std::function<void()> func) {
+void notify::AddFileName(std::string FileName, std::function<void(std::string)> func) {
   File.push_back(std::make_tuple(FileName, func));
 }
 

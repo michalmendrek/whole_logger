@@ -4,16 +4,16 @@
 using namespace std;
 
 
-void funkcja_testu(void)
+void funkcja_testu(std::string data)
 {
-//std::cout << "dupa" << std::endl;
+std::cout << data << std::endl;
 
 }
 
-void funkcja_dwa(void)
+void funkcja_dwa(std::string data)
 {
 
-//std::cout << "dupa2" << std::endl;
+std::cout << data << std::endl;
 }
 
 
