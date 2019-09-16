@@ -38,19 +38,17 @@ void notify::handler(int sig) {
       if (event->len > 0) {
         for (auto it : File) {
           if (event->name == std::get<0>(it)) {
-            if(std::get<1>(it)!=nullptr){
-            //std::get<1>(it)();
-	    //}
-            for(auto itb:Loger)
-	    {
- 	     if(event->name == eraseSubStr(itb->GetFileName(),"./"))
-		{
-		 itb->UpdateData();
-		 std::get<1>(it)(itb->ReadNewData());
-		}
+            if (std::get<1>(it) != nullptr) {
+              // std::get<1>(it)();
+              //}
+              for (auto itb : Loger) {
+                if (event->name == eraseSubStr(itb->GetFileName(), "./")) {
+                  itb->UpdateData();
+                  std::get<1>(it)(itb->ReadNewData());
+                }
+              }
             }
-	     }
-            //std::cout << event->name << std::endl;
+            // std::cout << event->name << std::endl;
           }
         }
       }
@@ -59,26 +57,23 @@ void notify::handler(int sig) {
   }
 }
 
-void notify::AddFileName(std::string FileName, std::function<void(std::string)> func) {
+void notify::AddFileName(std::string FileName,
+                         std::function<void(std::string)> func) {
   File.push_back(std::make_tuple(FileName, func));
 }
 
-void notify::AddLogerInstance(std::vector<log_loger *> LogInst)
-{
-  Loger=LogInst;
-
+void notify::AddLogerInstance(std::vector<log_loger *> LogInst) {
+  Loger = LogInst;
 }
 
+std::string notify::eraseSubStr(std::string mainStr,
+                                const std::string &toErase) {
+  // Search for the substring in string
+  size_t pos = mainStr.find(toErase);
 
-std::string notify::eraseSubStr(std::string  mainStr, const std::string & toErase)
-{
-	// Search for the substring in string
-	size_t pos = mainStr.find(toErase);
-
-	if (pos != std::string::npos)
-	{
-		// If found then erase it from string
-		mainStr.erase(pos, toErase.length());
-	}
- return mainStr;
+  if (pos != std::string::npos) {
+    // If found then erase it from string
+    mainStr.erase(pos, toErase.length());
+  }
+  return mainStr;
 }

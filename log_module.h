@@ -1,26 +1,16 @@
-#ifndef LOG_MODULE
-#define LOG_MODULE
-
-#include <unix_crawler.h>
-#include <memory>
+#include <log_module.h>
 #include <notification.h>
-#include <loger.h>
+#include <utility>
 
-class log_module
-{
-  private:
-          std::vector<std::string> LinksToLog;
-	  //std::vector<log_loger *> Loger;
-  public:
-  log_module(std::string Path, std::string ModuleName);
- ~log_module();
-  notify    *Notify;
-  //log_loger *Loger;
-   std::vector<log_loger *> Loger;
+log_module::log_module(std::string Path, std::string ModuleName) {
+  crawler data(ModuleName, Path + '*');
+  LinksToLog = data.GetLinks();
+  // for(auto it:LinksToLog) {  std::cout << it << std::endl;}
+  Notify = new notify(Path);
+  for (auto it : LinksToLog) {
+    Loger.push_back(new log_loger(it));
+  }
+  Notify->AddLogerInstance(Loger);
+}
 
-
-
-};
-
-
-#endif
+log_module::~log_module() {}
