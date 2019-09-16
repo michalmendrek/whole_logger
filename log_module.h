@@ -10,13 +10,13 @@ class log_module
 {
   private:
           std::vector<std::string> LinksToLog;
-	  //notify  *Notify;
+	  //std::vector<log_loger *> Loger;
   public:
   log_module(std::string Path, std::string ModuleName);
  ~log_module();
   notify    *Notify;
-  log_loger *Loger;
-
+  //log_loger *Loger;
+   std::vector<log_loger *> Loger;
 
 
 

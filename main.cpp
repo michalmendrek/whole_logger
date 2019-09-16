@@ -23,8 +23,14 @@ int main()
 log_module plik("./","module1");
 plik.Notify->AddFileName("module1.err.log",funkcja_testu);
 plik.Notify->AddFileName("module1.out.log",funkcja_dwa);
-plik.Loger->ReadWholeLog();
-cout << plik.Loger->ReadLog() << endl;
+
+
+plik.Loger[0]->ReadWholeLog();
+cout << plik.Loger[0]->ReadLog() << endl;
+
+plik.Loger[1]->ReadWholeLog();
+cout << plik.Loger[1]->ReadLog() << endl;
+
 while(1);
 
 
