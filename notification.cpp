@@ -12,7 +12,6 @@ std::function<void(int)> callback_wrapper;
 void callback_function(int sig) { callback_wrapper(sig); }
 
 notify::notify(std::string LogDir) {
-  std::cout << "LogDir " << LogDir << std::endl;
   std::string File = LogDir;
   inotifyFD = inotify_init();
   if (inotifyFD == -1) {
