@@ -6,14 +6,14 @@ using namespace std;
 
 void funkcja_testu(void)
 {
-std::cout << "dupa" << std::endl;
+//std::cout << "dupa" << std::endl;
 
 }
 
 void funkcja_dwa(void)
 {
 
-std::cout << "dupa2" << std::endl;
+//std::cout << "dupa2" << std::endl;
 }
 
 
@@ -30,7 +30,8 @@ cout << plik.Loger[0]->ReadLog() << endl;
 
 plik.Loger[1]->ReadWholeLog();
 cout << plik.Loger[1]->ReadLog() << endl;
-
+cout <<"Nazwa pliku Logera" << endl;
+cout << plik.Loger[1]->GetFileName() << endl;
 while(1);
 
 

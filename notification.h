@@ -11,6 +11,7 @@
 #include <string>
 #include <tuple>
 #include <vector>
+#include <loger.h>
 
 #define BUF_LEN (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
@@ -27,10 +28,12 @@ class notify {
   struct inotify_event *event;
   ssize_t numRead;
   void handler(int sig);
-
+  std::vector<log_loger *> Loger;
+  std::string eraseSubStr(std::string  mainStr, const std::string & toErase);
  public:
   notify(std::string LogDir);
   ~notify();
+  void AddLogerInstance(std::vector<log_loger *> LogInst);
   void AddFileName(std::string FileName, std::function<void()> func=nullptr);
 };
 
