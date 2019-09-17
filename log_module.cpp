@@ -36,7 +36,6 @@ void log_module::AddModule(std::string ModuleName, std::function<void(std::strin
    LinksToLog = data.GetLinks();
    for (auto it : LinksToLog) {
     Loger.push_back(new log_loger(it));
-    std::cout << "Plik: " << eraseSubStr(it, "./") << std::endl;
     Notify->AddFileName(eraseSubStr(it, "./"),CallBack);
   }
     Notify->AddLogerInstance(Loger);
@@ -50,6 +49,13 @@ std::string log_module::GetWholeLog(std::string ModuleName)
 {
   std::string WholeLog;
 
+  for(auto it:Loger)
+  {
+    auto out = (it->GetFileName()).find(ModuleName);
+    if(out!=std::string::npos) {it->ReadWholeLog();
+				WholeLog+=it->ReadLog();
+				}
+  }
 
 
 
