@@ -17,7 +17,7 @@
 
 class notify {
  private:
-  std::vector<std::tuple<std::string, std::function<void(std::string)>>> File;
+  std::vector<std::tuple<std::string, std::function<void(std::string,std::string)>>> File;
 
   int inotifyFD;
   int inotifyWD;
@@ -36,7 +36,7 @@ class notify {
   ~notify();
   void AddLogerInstance(std::vector<log_loger *> LogInst);
   void AddFileName(std::string FileName,
-                   std::function<void(std::string)> func = nullptr);
+                   std::function<void(std::string,std::string)> func = nullptr);
 };
 
 #endif

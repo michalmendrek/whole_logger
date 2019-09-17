@@ -3,14 +3,14 @@
 
 using namespace std;
 
-void funkcja_testu(std::string data) { std::cout << data << std::endl; }
+void funkcja_testu(std::string data,std::string name) { std::cout << "ModName: " << name << "Data: " << data << std::endl; }
 
-void funkcja_dwa(std::string data) { std::cout << data << std::endl; }
+void funkcja_dwa(std::string data, std::string name) { std::cout << "Dwa" << std::endl;  std::cout << "ModName: " << name << "Data: " << data << std::endl; }
 
 int main() {
-  log_module plik("./", "module1");
-  plik.Notify->AddFileName("module1.err.log", funkcja_testu);
-  plik.Notify->AddFileName("module1.out.log", funkcja_dwa);
+  log_module plik("./");
+  plik.AddModule("module1",funkcja_testu);
+  plik.AddModule("module2",funkcja_dwa);
 
   cout << plik.Loger[0]->GetFileName();
   plik.Loger[0]->ReadWholeLog();

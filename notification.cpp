@@ -44,7 +44,7 @@ void notify::handler(int sig) {
               for (auto itb : Loger) {
                 if (event->name == eraseSubStr(itb->GetFileName(), "./")) {
                   itb->UpdateData();
-                  std::get<1>(it)(itb->ReadNewData());
+                  std::get<1>(it)(itb->ReadNewData(),event->name);
                 }
               }
             }
@@ -58,7 +58,7 @@ void notify::handler(int sig) {
 }
 
 void notify::AddFileName(std::string FileName,
-                         std::function<void(std::string)> func) {
+                         std::function<void(std::string,std::string)> func) {
   File.push_back(std::make_tuple(FileName, func));
 }
 
