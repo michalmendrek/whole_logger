@@ -2,9 +2,7 @@
 #include <notification.h>
 #include <utility>
 
-
-std::string eraseSubStr(std::string mainStr,
-                                const std::string &toErase) {
+std::string eraseSubStr(std::string mainStr, const std::string &toErase) {
   // Search for the substring in string
   size_t pos = mainStr.find(toErase);
 
@@ -15,49 +13,35 @@ std::string eraseSubStr(std::string mainStr,
   return mainStr;
 }
 
-
-
-
-
-
 log_module::log_module(std::string Path) {
-
-    PathToLogDir=Path;
-    Notify = new notify(Path);
+  PathToLogDir = Path;
+  Notify = new notify(Path);
 }
 
 log_module::~log_module() {}
 
-
-void log_module::AddModule(std::string ModuleName, std::function<void(std::string,std::string)> CallBack)
-{
-
-   crawler data(ModuleName, PathToLogDir + '*');
-   LinksToLog = data.GetLinks();
-   for (auto it : LinksToLog) {
+void log_module::AddModule(
+    std::string ModuleName,
+    std::function<void(std::string, std::string)> CallBack) {
+  crawler data(ModuleName, PathToLogDir + '*');
+  LinksToLog = data.GetLinks();
+  for (auto it : LinksToLog) {
     Loger.push_back(new log_loger(it));
-    Notify->AddFileName(eraseSubStr(it, "./"),CallBack);
+    Notify->AddFileName(eraseSubStr(it, "./"), CallBack);
   }
-    Notify->AddLogerInstance(Loger);
-
-
-
+  Notify->AddLogerInstance(Loger);
 }
 
-
-std::string log_module::GetWholeLog(std::string ModuleName)
-{
+std::string log_module::GetWholeLog(std::string ModuleName) {
   std::string WholeLog;
 
-  for(auto it:Loger)
-  {
+  for (auto it : Loger) {
     auto out = (it->GetFileName()).find(ModuleName);
-    if(out!=std::string::npos) {it->ReadWholeLog();
-				WholeLog+=it->ReadLog();
-				}
+    if (out != std::string::npos) {
+      it->ReadWholeLog();
+      WholeLog += it->ReadLog();
+    }
   }
 
-
-
-return WholeLog;
+  return WholeLog;
 }
