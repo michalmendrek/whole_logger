@@ -18,7 +18,7 @@ class log_module {
   //notify *Notify;
   //std::vector<log_loger *> Loger;
   void AddModule(std::string ModuleName, std::function<void(std::string,std::string)> CallBack);
-  std::string GetWholeLog(std::string ModuleName);
+  std::string GetWholeLog(std::string ModuleName, int len =0);
 };
 
 #endif
